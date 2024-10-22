@@ -1,0 +1,41 @@
+while [ true ]; do
+        read -t10 -p "CANCEL STARTUP SCRIPT? [Yy]" -n 1 -r;
+        if [[ $REPLY =~ ^[Yy]$ ]]; then
+                break;
+	fi
+	
+	echo -e "\e[1;31m <<<<<<<<<<<<<<<<<<<<EXECUTING>>>>>>>>>>>>>>>>>>>> \e[0m"
+	echo -e "\e[1;31m ---------------------------------------------------------------- \e[0m"
+	cat SetupNotes.txt
+	echo -e "\e[1;31m ---------------------------------------------------------------- \e[0m"
+	sensors | grep °C
+	sleep 2
+	echo -e "\e[1;31m ---------------------------------------------------------------- \e[0m"
+	echo "Ctrl + c to cancel."
+	sleep 2
+	echo -e "\e[1;31m ---------------------------------------------------------------- \e[0m"
+	echo -e "\e[1;31m Search java \e[0m"
+	echo "PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND"
+	top -n 2 | grep java
+	echo -e "\e[1;31m ---------------------------------------------------------------- \e[0m"
+	echo -e "\e[1;31m Search Serve \e[0m"
+	echo "PID USER      PR  NI    VIRT    RES    SHR S  %CPU  %MEM     TIME+ COMMAND"
+	top -n 2 | grep Serve
+	echo -e "\e[1;31m ---------------------------------------------------------------- \e[0m"
+	screen -ls
+	echo -e "\e[1;31m ---------------------------------------------------------------- \e[0m"
+	echo -e "\e[1;31m END \e[0m"
+	echo "DISPLAYING DDNS STATUS"
+	/etc/init.d/ddclient status
+	
+	#this is just for notes on startup scripts with screen.
+	#screen -d -m -S "mc" dir//
+	#screen -d -m -S "7d" dir//
+	echo "screen -d -m -S "dawn""
+	echo "screen -d -m -S "7d""
+	echo "screen -d -m -S "sf""
+	echo "screen -d -m -S "vanilla""
+	screen -ls	
+	echo "End of ~/.bash_login has been reached."
+	break
+done
